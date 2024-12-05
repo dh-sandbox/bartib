@@ -1,6 +1,32 @@
 config_version = "0"
-exclude_patterns = ["**/node_modules/**"]
-test_patterns = ["**/test/**"]
+
+exclude_patterns = ["**/fixtures/**", "**/generated/**", "*.css"]
+
+# Code maintainability (structure and duplication) issues
+# are posted as comments but do not fail Quality Gates
+[checks]
+mode = "comment"
+
 [sources.default]
 repository = "https://github.com/qltysh/qlty.git"
 branch = "main"
+
+[[plugin]]
+name = "rubocop"
+version = "1.64.1"
+
+[[plugin]]
+name = "hadolint"
+
+[[plugin]]
+name = "shellcheck"
+
+[[plugin]]
+name = "osv-scanner"
+mode = "monitor"
+
+[[plugin]]
+name = "trufflehog"
+
+[[plugin]]
+name = "gitleaks"
