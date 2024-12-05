@@ -1,206 +1,35 @@
 config_version = "0"
-exclude_patterns = ["**/node_modules/**"]
-test_patterns = ["**/test/**"]
+
+exclude_patterns = ["**/fixtures/**", "**/generated/**", "*.css"]
+
+# Code maintainability (structure and duplication) issues
+# are posted as comments but do not fail Quality Gates
+[checks]
+mode = "comment"
+
 [sources.default]
 repository = "https://github.com/qltysh/qlty.git"
 branch = "main"
 
-plugin:
-- name: actionlint
-  version: 1.7.3
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: checkov
-  version: 3.2.269
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: golangci-lint
-  version: 1.61.0
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: markdownlint
-  version: 0.41.0
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: osv-scanner
-  version: 1.9.0
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: prettier
-  version: 3.3.3
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: ripgrep
-  version: 14.1.1
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: shellcheck
-  version: 0.10.0
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: shfmt
-  version: 3.8.0
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: trivy
-  version: 0.57.1
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - fs-vuln
-  - config
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: trufflehog
-  version: 3.82.12
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-- name: yamllint
-  version: 1.35.1
-  package_file: null
-  extra_packages: []
-  config_files: []
-  affects_cache: []
-  drivers:
-  - ALL
-  mode: block
-  skip_upstream: null
-  triggers: []
-  fetch: []
-  package_filters: []
-  prefix: null
-smells:
-  mode: null
-  duplication:
-    filter_patterns: []
-    nodes_threshold: 64
-  boolean_logic:
-    enabled: true
-    threshold: 4
-  nested_control_flow:
-    enabled: true
-    threshold: 5
-  function_parameters:
-    enabled: true
-    threshold: 6
-  return_statements:
-    enabled: true
-    threshold: 6
-  file_complexity:
-    enabled: true
-    threshold: 50
-  function_complexity:
-    enabled: true
-    threshold: 18
-  identical_code:
-    enabled: true
-    threshold: 15
-  similar_code:
-    enabled: true
-    threshold: 15
+[[plugin]]
+name = "rubocop"
+version = "1.64.1"
+
+[[plugin]]
+name = "hadolint"
+
+[[plugin]]
+name = "shellcheck"
+
+[[plugin]]
+name = "osv-scanner"
+mode = "monitor"
+
+[[plugin]]
+name = "semgrep"
+
+[[plugin]]
+name = "trufflehog"
+
+[[plugin]]
+name = "gitleaks"
