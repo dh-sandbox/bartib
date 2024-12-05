@@ -204,10 +204,3 @@ smells:
   similar_code:
     enabled: true
     threshold: 15
-source:
-- directory: null
-  repository: https://github.com/qltysh/qlty.git
-  ref: null
-  branch: null
-  tag: v0.458.0
-  name: default
