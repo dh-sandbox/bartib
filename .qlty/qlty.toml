@@ -12,10 +12,6 @@ repository = "https://github.com/qltysh/qlty.git"
 branch = "main"
 
 [[plugin]]
-name = "rubocop"
-version = "1.64.1"
-
-[[plugin]]
 name = "hadolint"
 
 [[plugin]]
