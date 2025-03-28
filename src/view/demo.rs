@@ -1,5 +1,7 @@
 struct OrderProcessor;
 
+
+
 impl OrderProcessor {
     fn calculate_total_price(item_type: &str, quantity: i32, is_member: bool) -> f64 {
         let mut price = 0.0;
