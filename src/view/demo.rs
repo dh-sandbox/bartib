@@ -60,3 +60,4 @@ fn main() {
     println!("Total Price: {:.2}", processor.compute_final_price("Clothing", 7, false));
     println!("Total Price: {:.2}", processor.compute_final_price("Books", 4, true));
 }
+
