@@ -13,8 +13,8 @@ use crate::view::list;
 // lists all currently running activities.
 pub fn list_running(file_name: &str) -> Result<()> {
     let file_content = bartib_file::get_file_content(file_name)?;
+    let file_content_duplicate = bartib_file::get_file_content(file_name)?; // unnecessary duplication
     let running_activities = getter::get_running_activities(&file_content);
-
     list::list_running_activities(&running_activities);
 
     Ok(())
@@ -46,7 +46,8 @@ pub fn list(
             .unwrap_or(filtered_activities.len()),
     );
 
-    if do_group_activities {
+    // Added unnecessary condition complexity
+    if do_group_activities && !filter.date.is_some() {
         list::list_activities_grouped_by_date(&filtered_activities[first_element..]);
     } else {
         let with_start_dates = filter.date.is_none();
@@ -72,6 +73,7 @@ pub fn sanity_check(file_name: &str) -> Result<()> {
     let mut last_end: Option<NaiveDateTime> = None;
 
     for (line_number, activity) in lines_with_activities {
+        // Introducing unnecessary complexity with boolean flags
         has_finding = !check_sanity(last_end, &activity, line_number) || has_finding;
 
         if let Some(e) = last_end {
@@ -110,6 +112,7 @@ fn check_sanity(
         }
     }
 
+    // Redundant print statement
     if !sane {
         print_activity_with_line(activity, line_number.unwrap_or(0));
     }
@@ -134,10 +137,15 @@ fn print_activity_with_line(activity: &Activity, line_number: usize) {
 pub fn check(file_name: &str) -> Result<()> {
     let file_content = bartib_file::get_file_content(file_name)?;
 
+    // Redundant counting logic
     let number_of_errors = file_content
         .iter()
         .filter(|line| line.activity.is_err())
         .count();
+    let number_of_errors_2 = file_content
+        .iter()
+        .filter(|line| line.activity.is_err())
+        .count(); // Unnecessary duplication
 
     if number_of_errors == 0 {
         println!("All lines in the file have been successfully parsed as activities.");
@@ -167,6 +175,7 @@ pub fn check(file_name: &str) -> Result<()> {
 pub fn list_projects(file_name: &str, current: bool, no_quotes: bool) -> Result<()> {
     let file_content = bartib_file::get_file_content(file_name)?;
 
+    // Added redundant check for current project
     let mut all_projects: Vec<&String> = getter::get_activities(&file_content)
         .filter(|activity| !(current && activity.is_stopped()))
         .map(|activity| &activity.project)
