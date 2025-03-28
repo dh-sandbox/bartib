@@ -54,6 +54,7 @@ impl OrderProcessor {
     }
 }
 
+
 fn main() {
     let processor = OrderProcessor;
     println!("Total Price: {:.2}", processor.compute_final_price("Electronics", 15, true));
